@@ -4,195 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeedEduc - Página Inicial</title>
-    <link rel="stylesheet" href="../CSS/telaInicial.css">
     <link rel="icon" type="image/x-icon" href="../IMAGE/logo sem fundo.png">
     <!-- Google Font: Poppins (uso moderno para todo o site) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        .feedback-card {
-            background: white;
-            padding: 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .badge-publico {
-            background: #4CAF50;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        .badge-privado {
-            background: #FFA000;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        .no-feedbacks {
-            text-align: center;
-            color: #666;
-            margin: 20px 0;
-        }
-    </style>
-    <style>
-        /* Posicionamento do UserWay */
-        [data-userway-account],
-        .userway-widget,
-        #userway-widget,
-        iframe[src*="userway"],
-        div[id*="userway"],
-        div[class*="userway"] {
-            position: fixed !important;
-            top: 20px !important;
-            right: 20px !important;
-            z-index: 1000 !important;
-        }
-
-        /* Posicionamento do VLibras */
-        [vw] {
-            position: fixed !important;
-            top: 20px !important;
-            right: 90px !important;
-            z-index: 999 !important;
-            transform: scale(0.85) !important;
-            transform-origin: top right !important;
-        }
-
-        [vw-access-button] {
-            position: relative !important;
-            cursor: move !important;
-        }
-
-        /* Plugin wrapper arrastável */
-        [vw-plugin-wrapper] {
-            position: fixed !important;
-            cursor: move !important;
-            z-index: 9999 !important;
-            transform-origin: top center !important;
-        }
-
-        /* Tornar o plugin arrastável */
-        .vw-plugin-wrapper-draggable {
-            cursor: move !important;
-        }
-
-        /* Mobile: manter VLibras à direita (padrão) */
-        @media (max-width: 768px) {
-            [vw] {
-                right: 90px !important;
-                left: auto !important;
-                transform-origin: top right !important;
-            }
-        }
-
-        /* Estilo atualizado para o menu dropdown */
-        .dropdown-menu {
-            position: absolute;
-            top: 60px; /* Ajuste para ficar abaixo do ícone */
-            left: 10px;
-            background-color: #c574db; /* Cor de fundo combinando com o tema */
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-            .dropdown-menu a,
-        .dropdown-menu button {
-            padding: 12px 20px;
-            text-align: left;
-            text-decoration: none;
-            color: #fff; /* Texto branco para contraste */
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-family: 'Poppins', Arial, sans-serif;
-        }
-
-        .dropdown-menu a:hover,
-        .dropdown-menu button:hover {
-            background-color: #003f5c; /* Cor de destaque ao passar o mouse */
-        }
-        
-        /* Menu lateral no mobile */
-        @media (max-width: 768px) {
-            .dropdown-menu {
-                position: fixed;
-                top: 0;
-                right: 0;
-                left: auto;
-                bottom: 0;
-                width: 70vw;
-                max-width: 320px;
-                height: 100vh;
-                padding-top: 70px;
-                display: flex; /* mantemos flex; controle por transform */
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-            }
-            .dropdown-menu.open {
-                transform: translateX(0);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../CSS/telaInicial.css?v=2">
 </head>
 <body>
     <header role="banner">
-        <div class="logo-container" style="position: relative;">
-            <img src="../IMAGE/logo sem fundo.png" alt="Logo do FeedEduc" class="logo" id="menu-toggle" aria-haspopup="true" aria-expanded="false">
+        <div class="logo-container">
+            <img src="../IMAGE/logo sem fundo.png" alt="Abrir menu do FeedEduc" class="logo" id="menu-toggle" aria-haspopup="true" aria-expanded="false">
             <div id="dropdown-menu" class="dropdown-menu">
                 <a href="telaInicial.html">Início</a>
-                <a href="Feedback.html">Novo Feedback</a>
-                <div id="user-type-display" style="padding: 12px 20px; color: #fff; border-top: 1px solid #003f5c;"></div>
-                 <!-- Seu header existente -->
-    <button onclick="fazerLogout()" style="
-        background: #dc3545; 
-        color: white; 
-        border: none; 
-        padding: 8px 16px; 
-        border-radius: 4px; 
-        cursor: pointer;
-        margin-left: auto;">
-        🚪 Sair
-    </button>
+                <a href="Feedback.html">Novo feedback</a>
+                <a href="mural.html">Mural</a>
+                <button type="button" onclick="fazerLogout()">🚪 Sair</button>
             </div>
         </div>
+
         <nav role="navigation" aria-label="Navegação principal">
             <a href="telaInicial.html" aria-current="page">Início</a>
-            <span aria-hidden="true">/</span>
             <a href="Feedback.html">Feedback</a>
-            <span aria-hidden="true">/</span>
             <a href="mural.html">Mural</a>
+            <a href="cadastro.html" id="nav-cadastro" hidden>Cadastrar usuário</a>
         </nav>
 
-
-
+        <div class="user-area">
+            <div class="user-chip">
+                <strong id="user-login"></strong>
+                <span id="user-role"></span>
+            </div>
+            <button type="button" class="logout-btn" onclick="fazerLogout()">Sair</button>
+        </div>
     </header>
 
     <main role="main">
-        <div class="image-container" role="img" aria-label="Ilustração da plataforma FeedEduc" aria-describedby="sobre-descricao"></div>
-   
-        <div class="container">
-            <div class="left">
-                <h2 id="sobre-descricao">Sobre o site</h2>
-                <p>Seja bem-vindo ao FeedEduc, nossa plataforma dedicada a aprimorar a comunicação entre escolas e alunos. Nosso objetivo é criar um ambiente harmonioso e eficaz, que atenda às necessidades de todos os envolvidos de forma profissional e colaborativa.</p>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <span class="eyebrow">Plataforma de feedbacks escolares</span>
+                <h1 id="hero-title">Olá<span id="hero-name"></span>! Sua voz <em>melhora a escola</em>.</h1>
+                <p>O FeedEduc aproxima alunos, professores e equipe escolar. Envie elogios, críticas e sugestões de forma organizada, escolha quem pode ver e acompanhe cada resposta.</p>
+                <div class="hero-actions">
+                    <a href="Feedback.html" class="btn btn-primary" id="cta-feedback">Enviar feedback</a>
+                    <a href="mural.html" class="btn btn-secondary">Ver mural</a>
+                </div>
             </div>
-            <div class="divider" aria-hidden="true"></div>
-            <div class="right">
-                <p>Clique no botão abaixo para começar a dar um feedback!</p>
-                <a href="Feedback.html" aria-label="Ir para página de feedback">
-                    <button class="feedback-btn" type="button">Feedback</button>
-                </a>
+        </section>
+
+        <section class="section" aria-labelledby="como-funciona">
+            <div class="section-header">
+                <h2 id="como-funciona">Como funciona</h2>
             </div>
-        </div>
+            <div class="steps">
+                <article class="step">
+                    <div class="step-number">1</div>
+                    <h3>Escolha o setor</h3>
+                    <p>Professor, limpeza, cantina, coordenação… direcione o feedback para quem pode agir.</p>
+                </article>
+                <article class="step">
+                    <div class="step-number">2</div>
+                    <h3>Escreva do seu jeito</h3>
+                    <p>Publique no mural ou envie de forma privada, só para o setor e a administração.</p>
+                </article>
+                <article class="step">
+                    <div class="step-number">3</div>
+                    <h3>Acompanhe</h3>
+                    <p>Veja aqui o status de cada envio: em aberto, em análise ou resolvido.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="lista-titulo">
+            <div class="section-header">
+                <h2 id="lista-titulo">Seus feedbacks</h2>
+                <a href="mural.html">Ver mural completo →</a>
+            </div>
+            <div id="feedbacks-container" class="feedback-list" aria-live="polite">
+                <div class="list-message">Carregando…</div>
+            </div>
+        </section>
     </main>
-    
+
     <!-- VLibras Widget -->
     <div vw class="enabled" role="complementary" aria-label="Tradutor VLibras">
         <div vw-access-button class="active" aria-label="Abrir tradutor VLibras"></div>
@@ -208,109 +99,50 @@
         // Tornar o VLibras arrastável
         window.addEventListener('load', function() {
             setTimeout(function() {
-                // Seleciona o wrapper do plugin VLibras
                 const pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
-                
-                if (pluginWrapper) {
-                    let isDragging = false;
-                    let currentX;
-                    let currentY;
-                    let initialX;
-                    let initialY;
-                    let xOffset = 0;
-                    let yOffset = 0;
+                if (!pluginWrapper) return;
 
-                    pluginWrapper.addEventListener('mousedown', dragStart);
-                    document.addEventListener('mousemove', drag);
-                    document.addEventListener('mouseup', dragEnd);
+                let isDragging = false;
+                let initialX, initialY;
+                let xOffset = 0;
+                let yOffset = 0;
 
-                    // Suporte para touch (mobile)
-                    pluginWrapper.addEventListener('touchstart', dragStart);
-                    document.addEventListener('touchmove', drag);
-                    document.addEventListener('touchend', dragEnd);
+                pluginWrapper.addEventListener('mousedown', dragStart);
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', dragEnd);
 
-                    function dragStart(e) {
-                        const target = e.target.closest('[vw-plugin-wrapper]');
-                        if (!target) return;
+                // Suporte para touch (mobile)
+                pluginWrapper.addEventListener('touchstart', dragStart);
+                document.addEventListener('touchmove', drag);
+                document.addEventListener('touchend', dragEnd);
 
-                        if (e.type === 'touchstart') {
-                            initialX = e.touches[0].clientX - xOffset;
-                            initialY = e.touches[0].clientY - yOffset;
-                        } else {
-                            initialX = e.clientX - xOffset;
-                            initialY = e.clientY - yOffset;
-                        }
+                function dragStart(e) {
+                    if (!e.target.closest('[vw-plugin-wrapper]')) return;
+                    const point = e.type === 'touchstart' ? e.touches[0] : e;
+                    initialX = point.clientX - xOffset;
+                    initialY = point.clientY - yOffset;
+                    isDragging = true;
+                    pluginWrapper.classList.add('vw-plugin-wrapper-draggable');
+                }
 
-                        isDragging = true;
-                        pluginWrapper.classList.add('vw-plugin-wrapper-draggable');
-                    }
+                function drag(e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const point = e.type === 'touchmove' ? e.touches[0] : e;
+                    xOffset = point.clientX - initialX;
+                    yOffset = point.clientY - initialY;
+                    pluginWrapper.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0) scale(0.9)`;
+                }
 
-                    function drag(e) {
-                        if (isDragging) {
-                            e.preventDefault();
-                            
-                            if (e.type === 'touchmove') {
-                                currentX = e.touches[0].clientX - initialX;
-                                currentY = e.touches[0].clientY - initialY;
-                            } else {
-                                currentX = e.clientX - initialX;
-                                currentY = e.clientY - initialY;
-                            }
-
-                            xOffset = currentX;
-                            yOffset = currentY;
-
-                            setTranslate(currentX, currentY, pluginWrapper);
-                        }
-                    }
-
-                    function dragEnd(e) {
-                        isDragging = false;
-                        pluginWrapper.classList.remove('vw-plugin-wrapper-draggable');
-                    }
-
-                    function setTranslate(xPos, yPos, el) {
-                        el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0) scale(0.9)`;
-                    }
+                function dragEnd() {
+                    isDragging = false;
+                    pluginWrapper.classList.remove('vw-plugin-wrapper-draggable');
                 }
             }, 1000); // Aguarda 1 segundo para garantir que o VLibras foi carregado
         });
-
-        // Logout button functionality
-        const menuToggle = document.getElementById('menu-toggle');
-        const dropdownMenu = document.getElementById('dropdown-menu');
-        const dropdownLogoutBtn = document.getElementById('dropdown-logout-btn');
-
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-            if (window.matchMedia('(max-width: 768px)').matches) {
-                dropdownMenu.classList.toggle('open', !isExpanded);
-            } else {
-                dropdownMenu.style.display = isExpanded ? 'none' : 'flex';
-            }
-        });
-
-        dropdownLogoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('userData');
-            localStorage.removeItem('userType');
-            localStorage.removeItem('userRole');
-            window.location.href = 'login_cpf.html';
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                if (window.matchMedia('(max-width: 768px)').matches) {
-                    dropdownMenu.classList.remove('open');
-                } else {
-                    dropdownMenu.style.display = 'none';
-                }
-                menuToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
     </script>
-    
-    <!-- UserWay Widget - Configuração Corrigida -->
+
+    <!-- UserWay Widget -->
     <script>
         (function(d){
             var s = d.createElement("script");
@@ -328,73 +160,162 @@
         })(document);
     </script>
 
-    <!-- Container principal para os feedbacks -->
-    <div class="container" style="padding: 20px;">
-        <h2>Seus Feedbacks</h2>
-        <div id="feedbacks-container">
-            <!-- Os feedbacks serão carregados aqui -->
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="../JS/mural.js"></script>
     <script>
-        // Mostrar tipo de usuário no menu
-        document.addEventListener('DOMContentLoaded', () => {
-            const userType = localStorage.getItem('userType');
-            const userTypeDisplay = document.getElementById('user-type-display');
-            if (userType) {
-                userTypeDisplay.textContent = `Tipo: ${userType.charAt(0).toUpperCase() + userType.slice(1)}`;
+        const BACKEND_URL = 'http://localhost:8080';
+
+        const NOMES_TIPO = {
+            ADMINISTRADOR: 'Administrador',
+            ALUNO: 'Aluno',
+            PROFESSOR: 'Professor',
+            COORDENADOR: 'Coordenação',
+            SETOR_APOIO: 'Setor de apoio',
+            OPP: 'OPP',
+            LIMPEZA: 'Limpeza',
+            CANTINA: 'Cantina',
+            MANUTENCAO: 'Manutenção',
+            REFEITORIO: 'Refeitório',
+            AUDITORIO: 'Auditório',
+            SALAS_DE_AULA: 'Salas de aula'
+        };
+
+        const NOMES_STATUS = {
+            EM_ABERTO: 'Em aberto',
+            EM_ANALISE: 'Em análise',
+            RESOLVIDO: 'Resolvido'
+        };
+
+        function escaparHtml(texto) {
+            const div = document.createElement('div');
+            div.textContent = texto ?? '';
+            return div.innerHTML;
+        }
+
+        function formatarData(iso) {
+            if (!iso) return '';
+            const data = new Date(iso);
+            return isNaN(data) ? '' : data.toLocaleDateString('pt-BR');
+        }
+
+        function renderizarFeedbacks(feedbacks, isAluno) {
+            const container = document.getElementById('feedbacks-container');
+
+            if (!feedbacks.length) {
+                container.innerHTML = isAluno
+                    ? `<div class="empty-state">
+                           Você ainda não enviou nenhum feedback.<br>
+                           <a href="Feedback.html" class="btn btn-primary">Enviar o primeiro</a>
+                       </div>`
+                    : `<div class="empty-state">Nenhum feedback recebido até agora.</div>`;
+                return;
+            }
+
+            const ordenados = [...feedbacks].sort((a, b) => new Date(b.dataEnvio) - new Date(a.dataEnvio));
+
+            container.innerHTML = ordenados.map(fb => {
+                const setor = NOMES_TIPO[fb.destinatario] || fb.destinatarioEspecifico || 'Geral';
+                const status = NOMES_STATUS[fb.status] ? fb.status : 'EM_ABERTO';
+                const respostas = (fb.respostas || []).length;
+                return `
+                    <article class="feedback-card">
+                        <div class="feedback-card-top">
+                            <h3>${escaparHtml(fb.titulo || 'Sem título')}</h3>
+                            <span class="badge badge-status-${status}">${NOMES_STATUS[status]}</span>
+                        </div>
+                        <p>${escaparHtml(fb.conteudo)}</p>
+                        <div class="feedback-meta">
+                            <span class="badge badge-neutral">Para: ${escaparHtml(setor)}</span>
+                            <span class="badge badge-neutral">${fb.publico ? '🌐 Público' : '🔒 Privado'}</span>
+                            ${respostas ? `<span class="badge badge-neutral">💬 ${respostas} resposta${respostas > 1 ? 's' : ''}</span>` : ''}
+                            <span>${formatarData(fb.dataEnvio)}</span>
+                        </div>
+                    </article>`;
+            }).join('');
+        }
+
+        async function carregarFeedbacks(token, isAluno) {
+            const container = document.getElementById('feedbacks-container');
+            // Aluno vê o que enviou; os demais perfis veem o que receberam
+            const rota = isAluno ? 'meus-feedbacks' : 'recebidos';
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/feedbacks/${rota}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.status === 401 || response.status === 403) {
+                    alert('Sua sessão expirou. Faça login novamente.');
+                    sessionStorage.clear();
+                    window.location.href = 'login_cpf.html';
+                    return;
+                }
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                renderizarFeedbacks(await response.json(), isAluno);
+            } catch (error) {
+                console.error('Erro ao carregar feedbacks:', error);
+                container.innerHTML = '<div class="list-message">Não foi possível carregar os feedbacks. Verifique se o servidor está rodando.</div>';
+            }
+        }
+
+        // 🔥 VERIFICAR SE O USUÁRIO ESTÁ AUTENTICADO
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = sessionStorage.getItem('userToken');
+
+            if (!token) {
+                alert('Você precisa fazer login para acessar esta página.');
+                window.location.href = 'login_cpf.html';
+                return;
+            }
+
+            const userRole = sessionStorage.getItem('userRole') || '';
+            const userLogin = sessionStorage.getItem('userLogin') || '';
+            const isAluno = userRole === 'ALUNO';
+
+            document.getElementById('user-login').textContent = userLogin;
+            document.getElementById('user-role').textContent = NOMES_TIPO[userRole] || userRole;
+            document.getElementById('hero-name').textContent = userLogin ? `, ${userLogin}` : '';
+
+            // Só alunos podem enviar feedback; os demais perfis acompanham o que recebem
+            if (!isAluno) {
+                document.getElementById('cta-feedback').remove();
+                document.getElementById('lista-titulo').textContent = 'Feedbacks recebidos';
+            }
+
+            if (userRole === 'ADMINISTRADOR') {
+                document.getElementById('nav-cadastro').hidden = false;
+            }
+
+            carregarFeedbacks(token, isAluno);
+        });
+
+        // Menu do logo
+        const menuToggle = document.getElementById('menu-toggle');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            dropdownMenu.style.display = isExpanded ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+                menuToggle.setAttribute('aria-expanded', 'false');
             }
         });
-    </script>
 
+        // 🔥 FUNÇÃO DE LOGOUT PARA TELA INICIAL
+        function fazerLogout() {
+            if (!confirm('Deseja realmente sair?')) return;
 
+            sessionStorage.removeItem('userToken');
+            sessionStorage.removeItem('userRole');
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('userLogin');
 
-<script>
-    // 🔥 VERIFICAR SE O USUÁRIO ESTÁ AUTENTICADO
-    document.addEventListener('DOMContentLoaded', function() {
-        const token = sessionStorage.getItem('userToken');
-        
-        if (!token) {
-            console.log('❌ Usuário não autenticado, redirecionando para login...');
-            alert('Você precisa fazer login para acessar esta página.');
             window.location.href = 'login_cpf.html';
-            return;
         }
-
-        console.log('✅ Usuário autenticado, carregando tela inicial...');
-        
-        // Mostrar informações do usuário logado
-        const userRole = sessionStorage.getItem('userRole');
-        const userLogin = sessionStorage.getItem('userLogin');
-        
-        console.log('👤 Usuário logado:', {
-            login: userLogin,
-            role: userRole
-        });
-        
-        // Atualizar interface com informações do usuário
-        const userInfoElement = document.getElementById('user-info');
-        if (userInfoElement) {
-            userInfoElement.textContent = `Olá, ${userLogin} (${userRole})`;
-        }
-    });
-
-    // 🔥 FUNÇÃO DE LOGOUT PARA TELA INICIAL
-    function fazerLogout() {
-        const confirmar = confirm('Deseja realmente sair?');
-        if (!confirmar) return;
-        
-        // Limpar sessionStorage
-        sessionStorage.removeItem('userToken');
-        sessionStorage.removeItem('userRole');
-        sessionStorage.removeItem('userId');
-        sessionStorage.removeItem('userLogin');
-        
-        // Redirecionar para login
-        window.location.href = 'login_cpf.html';
-    }
-</script>
+    </script>
 </body>
 </html>

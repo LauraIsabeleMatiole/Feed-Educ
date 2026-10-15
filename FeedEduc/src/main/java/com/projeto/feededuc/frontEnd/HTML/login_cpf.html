@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeedEduc - Login</title>
-    <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="stylesheet" href="../CSS/login.css?v=2">
     <link rel="icon" type="image/x-icon" href="../IMAGE/logo sem fundo.png">
 </head>
 <body>
@@ -165,7 +165,7 @@
 
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
-            userRole = payload.role || 'ALUNO';
+            userRole = payload.tipoUsuario || 'ALUNO';
             userId = payload.sub || null;
             console.log('👤 Informações do token:', payload);
         } catch (e) {
@@ -186,7 +186,7 @@
 
         console.log('🔑 Login completo - Role:', userRole);
 
-        if (userRole === 'ADMIN') {
+        if (userRole === 'ADMINISTRADOR') {
             window.location.href = 'mural.html';
         } else {
             window.location.href = 'telaInicial.html';
@@ -273,7 +273,7 @@
 
                     try {
                         const payload = JSON.parse(atob(token.split('.')[1]));
-                        userRole = payload.role || 'ALUNO';
+                        userRole = payload.tipoUsuario || 'ALUNO';
                         userId = payload.sub || null;
                         console.log('👤 Informações do token:', payload);
                     } catch (e) {
@@ -288,7 +288,7 @@
                     console.log('🔑 Login completo - Role:', userRole);
                     console.log('💾 Token salvo no sessionStorage');
 
-                    if (userRole === 'ADMIN') {
+                    if (userRole === 'ADMINISTRADOR') {
                         window.location.href = 'mural.html';
                     } else {
                         window.location.href = 'telaInicial.html';

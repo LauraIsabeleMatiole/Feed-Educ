@@ -4,278 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeedEduc - Enviar Feedback</title>
-    <link rel="stylesheet" href="../CSS/Feedback.css">
+    <link rel="stylesheet" href="../CSS/Feedback.css?v=2">
     <link rel="icon" type="image/x-icon" href="../IMAGE/logo sem fundo.png">
-    <style>
-        /* Estilos anteriores mantidos */
-        [vw] {
-            position: fixed !important;
-            top: 20px !important;
-            right: 90px !important;
-            z-index: 999 !important;
-            transform: scale(0.85) !important;
-            transform-origin: top right !important;
-        }
-
-        [vw-access-button] {
-            position: relative !important;
-            cursor: move !important;
-        }
-
-        [vw-plugin-wrapper] {
-            position: fixed !important;
-            cursor: move !important;
-            z-index: 9999 !important;
-            transform-origin: top center !important;
-        }
-
-        .vw-plugin-wrapper-draggable {
-            cursor: move !important;
-        }
-
-        @media (max-width: 768px) {
-            [vw] {
-                right: 90px !important;
-                left: auto !important;
-                transform-origin: top right !important;
-            }
-        }
-        
-        [data-userway-account],
-        .userway-widget,
-        #userway-widget,
-        iframe[src*="userway"],
-        div[id*="userway"],
-        div[class*="userway"] {
-            position: fixed !important;
-            top: 20px !important;
-            right: 20px !important;
-            z-index: 1000 !important;
-        }
-        
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 60px;
-            left: 10px;
-            background-color: #c574db;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-        .dropdown-menu a,
-        .dropdown-menu button {
-            padding: 12px 20px;
-            text-align: left;
-            text-decoration: none;
-            color: #fff;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-family: 'Poppins', Arial, sans-serif;
-        }
-
-        .dropdown-menu a:hover,
-        .dropdown-menu button:hover {
-            background-color: #003f5c;
-        }
-
-        @media (max-width: 768px) {
-            .dropdown-menu {
-                position: fixed;
-                top: 0;
-                right: 0;
-                left: auto;
-                bottom: 0;
-                width: 70vw;
-                max-width: 320px;
-                height: 100vh;
-                padding-top: 70px;
-                display: flex;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-            }
-            .dropdown-menu.open {
-                transform: translateX(0);
-            }
-        }
-
-        .logout-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            width: 100%;
-        }
-
-        /* Novos estilos para avaliação por estrelas */
-        .rating-container {
-            margin: 15px 0;
-            text-align: center;
-        }
-
-        .rating-label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .star-rating {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin-bottom: 10px;
-        }
-
-        .star {
-            font-size: 24px;
-            cursor: pointer;
-            color: #ccc;
-            transition: color 0.2s;
-        }
-
-        .star:hover,
-        .star.active {
-            color: #ffc107;
-        }
-
-        .rating-text {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .error-message {
-            color: #d32f2f;
-            background-color: #ffebee;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            display: none;
-        }
-
-        .success-message {
-            color: #2e7d32;
-            background-color: #e8f5e8;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-            display: none;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header role="banner">
-        <div class="logo-container" style="position: relative;">
-            <img src="../IMAGE/logo sem fundo.png" alt="Logo do FeedEduc" class="logo" id="menu-toggle" aria-haspopup="true" aria-expanded="false">
+        <div class="logo-container">
+            <img src="../IMAGE/logo sem fundo.png" alt="Abrir menu do FeedEduc" class="logo" id="menu-toggle" aria-haspopup="true" aria-expanded="false">
             <div id="dropdown-menu" class="dropdown-menu">
                 <a href="telaInicial.html">Início</a>
                 <a href="Feedback.html">Feedback</a>
                 <a href="mural.html">Mural</a>
-                <button id="dropdown-logout-btn" class="logout-btn">Logout</button>
+                <button id="dropdown-logout-btn" type="button">🚪 Sair</button>
             </div>
         </div>
         <nav role="navigation" aria-label="Navegação principal">
             <a href="telaInicial.html">Início</a>
-            <span aria-hidden="true">/</span>
             <a href="Feedback.html" aria-current="page">Feedback</a>
-            <span aria-hidden="true">/</span>
             <a href="mural.html">Mural</a>
         </nav>
+        <div class="user-area">
+            <div class="user-chip">
+                <strong id="user-login"></strong>
+                <span id="user-role"></span>
+            </div>
+            <button type="button" class="header-logout" onclick="document.getElementById('dropdown-logout-btn').click()">Sair</button>
+        </div>
     </header>
-    
+
     <main class="feedback-main" role="main">
         <div class="feedback-container">
+            <h1 class="page-title">Enviar feedback</h1>
+            <p class="page-subtitle">Elogios, críticas e sugestões ajudam a escola a melhorar. Escolha para quem é e conte o que aconteceu.</p>
+
             <!-- Mensagens de status -->
             <div id="error-message" class="error-message" role="alert"></div>
             <div id="success-message" class="success-message" role="alert"></div>
 
-            <div class="feedback-categories">
-                <div class="main-option" data-target="category-options" role="button" tabindex="0" aria-expanded="false" aria-controls="category-options">Setor Alvo</div>
-                <div class="sub-options" id="category-options" role="listbox" aria-label="Setores disponíveis para feedback">
-                    <div class="sub-option" role="option" tabindex="0" data-value="Professor">Professor</div>
-                    <div class="sub-option" role="option" tabindex="0" data-value="Limpeza">Limpeza</div>
-                    <div class="sub-option" role="option" tabindex="0" data-value="Manutenção">Manutenção</div>
-                    <div class="sub-option" role="option" tabindex="0" data-value="Sala de Aula">Sala de Aula</div>
-                    <div class="sub-option" role="option" tabindex="0" data-value="Equipamentos">Equipamentos</div>
-                    <div class="sub-option" role="option" tabindex="0" data-value="Setor de Apoio">Setor de Apoio</div>
+            <div class="field">
+                <span class="field-label" id="setor-label">Para quem é?</span>
+                <div class="feedback-categories">
+                    <div class="main-option" data-target="category-options" role="button" tabindex="0" aria-expanded="false" aria-controls="category-options" aria-labelledby="setor-label">Escolha um setor</div>
+                    <div class="sub-options" id="category-options" role="listbox" aria-label="Setores disponíveis para feedback">
+                        <div class="sub-option" role="option" tabindex="0" data-value="Professor">Professor</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Coordenador">Coordenação</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Sala de Aula">Sala de Aula</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Limpeza">Limpeza</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Manutenção">Manutenção</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Equipamentos">Equipamentos</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Cantina">Cantina</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Refeitório">Refeitório</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Auditório">Auditório</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="Setor de Apoio">Setor de Apoio</div>
+                        <div class="sub-option" role="option" tabindex="0" data-value="OPP">OPP</div>
+                    </div>
+                </div>
+                <div class="feedback-nome">
+                    <input id="setor-alvo" type="text" placeholder="Ou especifique: Professor João, Sala 301…" autocomplete="off" aria-label="Setor ou pessoa específica do feedback">
+                    <div class="input-icon" aria-hidden="true">👨‍🏫</div>
                 </div>
             </div>
 
-            <div class="feedback-nome">
-                <input id="setor-alvo" type="text" placeholder="Especificar setor/pessoa (ex: Professor João, Sala 301)" autocomplete="off" aria-label="Setor ou pessoa específica do feedback">
-                <div class="input-icon" aria-hidden="true">👨‍🏫</div>
+            <div class="field">
+                <label class="field-label" for="titulo">Título</label>
+                <input id="titulo" type="text" placeholder="Resuma em poucas palavras">
             </div>
 
-            <div class="feedback-input">
-                <input id="titulo" type="text" placeholder="Título do feedback" aria-label="Título do feedback">
-                <textarea id="conteudo" placeholder="Descreva seu feedback em detalhes..." aria-label="Conteúdo do feedback" rows="5"></textarea>
+            <div class="field">
+                <label class="field-label" for="conteudo">Descrição</label>
+                <textarea id="conteudo" placeholder="Descreva seu feedback em detalhes…" rows="5"></textarea>
             </div>
 
             <!-- Avaliação por estrelas -->
-            <div class="rating-container">
-                <label class="rating-label">Avaliação (opcional):</label>
-                <div class="star-rating" role="radiogroup" aria-label="Avaliação de 1 a 5 estrelas">
-                    <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">★</span>
-                    <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="0">★</span>
-                    <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="0">★</span>
-                    <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="0">★</span>
-                    <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="0">★</span>
+            <div class="field rating-container">
+                <span class="field-label" id="rating-label">Avaliação <small>(opcional)</small></span>
+                <div class="star-rating" role="radiogroup" aria-labelledby="rating-label">
+                    <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0" aria-label="1 estrela">★</span>
+                    <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="0" aria-label="2 estrelas">★</span>
+                    <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="0" aria-label="3 estrelas">★</span>
+                    <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="0" aria-label="4 estrelas">★</span>
+                    <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="0" aria-label="5 estrelas">★</span>
                 </div>
                 <div class="rating-text" id="rating-text">Clique nas estrelas para avaliar (1-5)</div>
             </div>
 
-            <div class="feedback-options">
-                <div class="feedback-options-top">
-                    <div class="privacy-container">
-                        <div class="privacy-header">
-                            <p class="privacy-label">Visibilidade:</p>
-                            <div class="privacy-scroller" role="radiogroup" aria-label="Opções de visibilidade do feedback">
-                                <div class="privacy-option">
-                                    <input type="radio" id="privado" name="privacy" value="true" checked aria-describedby="privacy-description privado-desc">
-                                    <label for="privado">Privado</label>
-                                </div>
-                                <div class="privacy-option">
-                                    <input type="radio" id="publico" name="privacy" value="false" aria-describedby="privacy-description publico-desc">
-                                    <label for="publico">Público</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="privacy-description" class="sr-only">
-                            Escolha a visibilidade do seu feedback. Privado: visível apenas para o setor responsável e administração. Público: visível para todos os usuários.
-                        </div>
-                        <div class="privacy-descriptions">
-                            <div id="privado-desc" class="privacy-desc" aria-live="polite">
-                                <strong>Visível para:</strong> Apenas o setor responsável e administração.
-                                <br><strong>Ideal para:</strong> Feedback sensível ou pessoal.
-                            </div>
-                            <div id="publico-desc" class="privacy-desc" aria-live="polite" style="display: none;">
-                                <strong>Visível para:</strong> Todos os usuários da plataforma.
-                                <br><strong>Ideal para:</strong> Elogios e sugestões construtivas.
-                            </div>
-                        </div>
+            <div class="field">
+                <span class="field-label" id="privacy-label">Quem pode ver?</span>
+                <div class="privacy-scroller" role="radiogroup" aria-labelledby="privacy-label">
+                    <div class="privacy-option">
+                        <input type="radio" id="privado" name="privacy" value="true" checked aria-describedby="privado-desc">
+                        <label for="privado">🔒 Privado</label>
                     </div>
-
-                    <button class="submit-btn" onclick="enviarFeedback()" type="button" aria-label="Enviar feedback">Enviar Feedback</button>
+                    <div class="privacy-option">
+                        <input type="radio" id="publico" name="privacy" value="false" aria-describedby="publico-desc">
+                        <label for="publico">🌐 Público</label>
+                    </div>
+                </div>
+                <div id="privado-desc" class="privacy-desc" aria-live="polite">
+                    <strong>Visível para:</strong> apenas o setor responsável e a administração.
+                    <br><strong>Ideal para:</strong> feedback sensível ou pessoal.
+                </div>
+                <div id="publico-desc" class="privacy-desc" aria-live="polite" style="display: none;">
+                    <strong>Visível para:</strong> todos os usuários, no mural.
+                    <br><strong>Ideal para:</strong> elogios e sugestões construtivas.
                 </div>
             </div>
+
+            <button class="submit-btn" onclick="enviarFeedback()" type="button">Enviar feedback</button>
         </div>
     </main>
     
@@ -286,6 +122,8 @@
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('user-login').textContent = sessionStorage.getItem('userLogin') || '';
+            document.getElementById('user-role').textContent = (sessionStorage.getItem('userRole') || '').replace('ADMINISTRADOR', 'Administrador').replace('ALUNO', 'Aluno');
             inicializarComponentes();
             verificarAutenticacao();
         });
@@ -465,6 +303,8 @@
                     'cantina': 'CANTINA',
                     'refeitorio': 'REFEITORIO',
                     'auditorio': 'AUDITORIO',
+                    'refeitório': 'REFEITORIO',
+                    'auditório': 'AUDITORIO',
                     'opp': 'OPP',
                     'coordenador': 'COORDENADOR',
                     'equipamentos': null
@@ -532,7 +372,7 @@
             setorSelecionado = '';
             document.querySelectorAll('.main-option').forEach(opt => {
                 if (opt.getAttribute('data-target') === 'category-options') {
-                    opt.textContent = 'Setor Alvo';
+                    opt.textContent = 'Escolha um setor';
                 }
             });
         }

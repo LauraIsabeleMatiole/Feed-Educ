@@ -58,6 +58,45 @@ input {
     background-color: #f5f5f5;
 }
 
+label[for="tipoUsuarioSelect"] {
+    display: block;
+    margin-bottom: 6px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#tipoUsuarioSelect {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    font-size: 14px;
+}
+
+#error-message,
+#success-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 5px;
+    line-height: 1.6;
+}
+
+#error-message {
+    background: #fdecea;
+    color: #b71c1c !important;
+}
+
+#success-message {
+    background: #e8f5e9;
+    color: #1b5e20 !important;
+}
+
+.container a {
+    color: #1ca8ac;
+}
+
 button[type="submit"] {
     width: 100%;
     padding: 12px;
