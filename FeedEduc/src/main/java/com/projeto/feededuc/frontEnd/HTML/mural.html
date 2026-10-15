@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../IMAGE/logo sem fundo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/mural.css?v=2">
+    <script src="../JS/config.js?v=2"></script>
 </head>
 <body>
     <header role="banner">
@@ -111,7 +112,7 @@
     </script>
 
     <script>
-        const BACKEND_URL = 'http://localhost:8080';
+        const BACKEND_URL = window.BACKEND_URL;
 
         const NOMES_TIPO = {
             ADMINISTRADOR: 'Administrador',

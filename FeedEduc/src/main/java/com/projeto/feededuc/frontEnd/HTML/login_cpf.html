@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeedEduc - Login</title>
-    <link rel="stylesheet" href="../CSS/login.css?v=2">
+    <link rel="stylesheet" href="../CSS/login.css?v=3">
+    <script src="../JS/config.js?v=2"></script>
     <link rel="icon" type="image/x-icon" href="../IMAGE/logo sem fundo.png">
 </head>
 <body>
@@ -108,7 +109,7 @@
                 try {
                     console.log('🔐 Tentando login...', { login, senha });
 
-                    const res = await fetch('http://localhost:8080/auth/login', {
+                    const res = await fetch(`${window.BACKEND_URL}/auth/login`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
@@ -218,7 +219,7 @@
                     }
 
                     try {
-                        const res = await fetch('http://localhost:8080/api/usuarios/trocar-senha', {
+                        const res = await fetch(`${window.BACKEND_URL}/api/usuarios/trocar-senha`, {
                             method: 'PUT',
                             headers: { 
                                 'Content-Type': 'application/json',
