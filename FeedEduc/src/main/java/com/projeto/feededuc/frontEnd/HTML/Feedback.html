@@ -402,13 +402,13 @@
         }
 
         function verificarAutenticacao() {
-            const token = localStorage.getItem('userToken');
-            const userRole = localStorage.getItem('userRole');
+            const token = sessionStorage.getItem('userToken');
+            const userRole = sessionStorage.getItem('userRole');
             
             if (!token) {
                 mostrarErro('Você precisa estar logado para enviar feedback.');
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = 'login_cpf.html';
                 }, 2000);
                 return false;
             }
@@ -486,7 +486,7 @@
             console.log('📤 Enviando feedback:', feedbackData);
 
             try {
-                const token = localStorage.getItem('userToken');
+                const token = sessionStorage.getItem('userToken');
                 const response = await fetch('http://localhost:8080/api/feedbacks', {
                     method: 'POST',
                     headers: {
@@ -571,11 +571,11 @@
         });
 
         dropdownLogoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('userToken');
-            localStorage.removeItem('userRole');
-            localStorage.removeItem('userId');
-            localStorage.removeItem('userLogin');
-            window.location.href = 'login.html';
+            sessionStorage.removeItem('userToken');
+            sessionStorage.removeItem('userRole');
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('userLogin');
+            window.location.href = 'login_cpf.html';
         });
 
         document.addEventListener('click', (event) => {
