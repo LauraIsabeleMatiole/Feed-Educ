@@ -6,7 +6,7 @@
     <title>FeedEduc - Mural de Feedbacks</title>
     <link rel="icon" type="image/x-icon" href="../IMAGE/logo sem fundo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/mural.css?v=2">
+    <link rel="stylesheet" href="../CSS/mural.css?v=3">
     <script src="../JS/config.js?v=3"></script>
 </head>
 <body>
@@ -155,8 +155,13 @@
             return isNaN(data) ? '' : data.toLocaleDateString('pt-BR');
         }
 
+        // Aviso: publicação sem destinatário, feita pelo administrador para todos
+        function isAviso(fb) {
+            return !fb.destinatario && !fb.destinatarioEspecifico;
+        }
+
         function nomeSetor(fb) {
-            return NOMES_TIPO[fb.destinatario] || fb.destinatarioEspecifico || 'Geral';
+            return isAviso(fb) ? 'Todos' : (NOMES_TIPO[fb.destinatario] || fb.destinatarioEspecifico);
         }
 
         function mostrarAviso(mensagem, tipo) {
@@ -207,7 +212,9 @@
 
             const porId = new Map();
             [...publicos, ...extras].forEach(fb => porId.set(fb.id, fb));
-            todosFeedbacks = [...porId.values()].sort((a, b) => new Date(b.dataEnvio) - new Date(a.dataEnvio));
+            // Avisos fixados no topo; dentro de cada grupo, os mais recentes primeiro
+            todosFeedbacks = [...porId.values()].sort((a, b) =>
+                (isAviso(b) - isAviso(a)) || (new Date(b.dataEnvio) - new Date(a.dataEnvio)));
 
             preencherFiltroSetor();
             aplicarFiltros();
@@ -305,8 +312,9 @@
                 </form>`;
 
             return `
-                <article class="feedback-card ${isProprio ? 'is-own' : ''}">
+                <article class="feedback-card ${isAviso(fb) ? 'is-aviso' : isProprio ? 'is-own' : ''}">
                     <div class="card-badges">
+                        ${isAviso(fb) ? '<span class="badge badge-aviso">📢 Aviso</span>' : ''}
                         <span class="badge badge-status-${status}">${NOMES_STATUS[status]}</span>
                         <span class="badge badge-neutral">${fb.publico ? '🌐 Público' : '🔒 Privado'}</span>
                         ${isProprio ? '<span class="badge badge-own">✍️ Seu feedback</span>' : ''}
@@ -401,7 +409,11 @@
             document.getElementById('user-login').textContent = usuario.login;
             document.getElementById('user-role').textContent = NOMES_TIPO[usuario.role] || usuario.role;
 
-            if (usuario.role !== 'ALUNO') {
+            if (usuario.role === 'ADMINISTRADOR') {
+                document.getElementById('cta-feedback').textContent = '📢 Novo aviso';
+                document.getElementById('page-subtitle').textContent =
+                    'Feedbacks públicos, os enviados para você e os avisos publicados.';
+            } else if (usuario.role !== 'ALUNO') {
                 document.getElementById('cta-feedback').remove();
                 document.getElementById('page-subtitle').textContent =
                     'Feedbacks públicos e os que foram enviados para você.';

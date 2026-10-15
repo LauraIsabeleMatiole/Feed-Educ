@@ -36,14 +36,14 @@
 
     <main class="feedback-main" role="main">
         <div class="feedback-container">
-            <h1 class="page-title">Enviar feedback</h1>
-            <p class="page-subtitle">Elogios, críticas e sugestões ajudam a escola a melhorar. Escolha para quem é e conte o que aconteceu.</p>
+            <h1 class="page-title" id="page-title">Enviar feedback</h1>
+            <p class="page-subtitle" id="page-subtitle">Elogios, críticas e sugestões ajudam a escola a melhorar. Escolha para quem é e conte o que aconteceu.</p>
 
             <!-- Mensagens de status -->
             <div id="error-message" class="error-message" role="alert"></div>
             <div id="success-message" class="success-message" role="alert"></div>
 
-            <div class="field">
+            <div class="field" id="campo-setor">
                 <span class="field-label" id="setor-label">Para quem é?</span>
                 <div class="feedback-categories">
                     <div class="main-option" data-target="category-options" role="button" tabindex="0" aria-expanded="false" aria-controls="category-options" aria-labelledby="setor-label">Escolha um setor</div>
@@ -78,7 +78,7 @@
             </div>
 
             <!-- Avaliação por estrelas -->
-            <div class="field rating-container">
+            <div class="field rating-container" id="campo-avaliacao">
                 <span class="field-label" id="rating-label">Avaliação <small>(opcional)</small></span>
                 <div class="star-rating" role="radiogroup" aria-labelledby="rating-label">
                     <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0" aria-label="1 estrela">★</span>
@@ -90,7 +90,7 @@
                 <div class="rating-text" id="rating-text">Clique nas estrelas para avaliar (1-5)</div>
             </div>
 
-            <div class="field">
+            <div class="field" id="campo-visibilidade">
                 <span class="field-label" id="privacy-label">Quem pode ver?</span>
                 <div class="privacy-scroller" role="radiogroup" aria-labelledby="privacy-label">
                     <div class="privacy-option">
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <button class="submit-btn" onclick="enviarFeedback()" type="button">Enviar feedback</button>
+            <button class="submit-btn" id="submit-btn" onclick="enviarFeedback()" type="button">Enviar feedback</button>
         </div>
     </main>
     
@@ -120,12 +120,14 @@
         // Variáveis globais
         let setorSelecionado = '';
         let notaSelecionada = 0;
+        const isAdmin = sessionStorage.getItem('userRole') === 'ADMINISTRADOR';
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('user-login').textContent = sessionStorage.getItem('userLogin') || '';
             document.getElementById('user-role').textContent = (sessionStorage.getItem('userRole') || '').replace('ADMINISTRADOR', 'Administrador').replace('ALUNO', 'Aluno');
             inicializarComponentes();
+            if (isAdmin) ativarModoAviso();
             verificarAutenticacao();
         });
 
@@ -252,13 +254,25 @@
                 return false;
             }
 
-            // Apenas alunos podem enviar feedback
-            if (userRole !== 'ALUNO') {
+            // Alunos enviam feedback; o administrador publica avisos no mural
+            if (userRole !== 'ALUNO' && userRole !== 'ADMINISTRADOR') {
                 mostrarErro('Apenas alunos podem enviar feedback.');
                 return false;
             }
 
             return true;
+        }
+
+        function ativarModoAviso() {
+            document.title = 'FeedEduc - Publicar aviso';
+            document.getElementById('page-title').textContent = 'Publicar aviso';
+            document.getElementById('page-subtitle').textContent =
+                'O aviso aparece fixado no topo do mural, visível para todos os usuários.';
+            document.getElementById('campo-setor').style.display = 'none';
+            document.getElementById('campo-avaliacao').style.display = 'none';
+            document.getElementById('campo-visibilidade').style.display = 'none';
+            document.getElementById('submit-btn').textContent = 'Publicar aviso';
+            document.getElementById('conteudo').placeholder = 'Escreva o aviso para a comunidade escolar…';
         }
 
         async function enviarFeedback() {
@@ -282,7 +296,7 @@
                 return;
             }
 
-            if (!setorAlvo) {
+            if (!setorAlvo && !isAdmin) {
                 mostrarErro('Por favor, selecione ou especifique um setor alvo.');
                 return;
             }
@@ -315,7 +329,14 @@
 
             const mapped = mapSetorToTipo(setorAlvo);
 
-            const feedbackData = {
+            // Aviso do administrador: sem destinatário (vale para todos) e sempre público
+            const feedbackData = isAdmin ? {
+                titulo: titulo,
+                conteudo: conteudo,
+                destinatario: null,
+                destinatarioEspecifico: null,
+                publico: true
+            } : {
                 titulo: titulo,
                 conteudo: conteudo,
                 destinatario: mapped,
@@ -341,12 +362,12 @@
 
                 if (response.ok) {
                     const feedbackCriado = await response.json();
-                    mostrarSucesso('✅ Feedback enviado com sucesso!');
+                    mostrarSucesso(isAdmin ? '✅ Aviso publicado no mural!' : '✅ Feedback enviado com sucesso!');
                     limparFormulario();
                     
                     // Redirecionar após sucesso
                     setTimeout(() => {
-                        window.location.href = 'telaInicial.html';
+                        window.location.href = isAdmin ? 'mural.html' : 'telaInicial.html';
                     }, 2000);
                 } else {
                     const errorText = await response.text();

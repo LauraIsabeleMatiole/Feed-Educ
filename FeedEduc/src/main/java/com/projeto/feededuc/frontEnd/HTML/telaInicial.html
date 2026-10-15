@@ -277,7 +277,10 @@
             document.getElementById('hero-name').textContent = userLogin ? `, ${userLogin}` : '';
 
             // Só alunos podem enviar feedback; os demais perfis acompanham o que recebem
-            if (!isAluno) {
+            if (userRole === 'ADMINISTRADOR') {
+                document.getElementById('cta-feedback').textContent = '📢 Publicar aviso';
+                document.getElementById('lista-titulo').textContent = 'Feedbacks recebidos';
+            } else if (!isAluno) {
                 document.getElementById('cta-feedback').remove();
                 document.getElementById('lista-titulo').textContent = 'Feedbacks recebidos';
             }

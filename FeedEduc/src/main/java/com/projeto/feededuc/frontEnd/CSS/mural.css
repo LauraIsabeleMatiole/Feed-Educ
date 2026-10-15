@@ -284,6 +284,11 @@ nav a[aria-current="page"] {
     border-top-color: var(--purple);
 }
 
+.feedback-card.is-aviso {
+    border-top-color: #ffc107;
+    background-color: #45423a;
+}
+
 .card-badges {
     display: flex;
     flex-wrap: wrap;
@@ -301,6 +306,11 @@ nav a[aria-current="page"] {
 .badge-neutral {
     background: var(--surface-2);
     color: var(--text);
+}
+
+.badge-aviso {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffd54f;
 }
 
 .badge-own {
