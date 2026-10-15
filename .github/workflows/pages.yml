@@ -1,5 +1,7 @@
-# Publica as telas (HTML/CSS/JS/imagens) no GitHub Pages a cada push na main.
-name: Publicar telas no GitHub Pages
+# Publica no GitHub Pages:
+#   /            -> landing page (branch landingpage)
+#   /sistema/    -> telas do sistema (pasta frontEnd da main)
+name: Publicar site no GitHub Pages
 
 on:
   push:
@@ -25,10 +27,26 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Baixar a main (telas do sistema)
+        uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Baixar a landing page
+        uses: actions/checkout@v4
+        with:
+          ref: landingpage
+          path: landing
+
+      - name: Montar o site
+        run: |
+          mkdir -p site/sistema
+          rsync -a --exclude '.git' landing/ site/
+          rsync -a main/FeedEduc/src/main/java/com/projeto/feededuc/frontEnd/ site/sistema/
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: FeedEduc/src/main/java/com/projeto/feededuc/frontEnd
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4
