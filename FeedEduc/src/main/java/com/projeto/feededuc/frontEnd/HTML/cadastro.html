@@ -31,10 +31,9 @@
                 <option value="LIMPEZA">Limpeza</option>
                 <option value="MANUTENCAO">Manutenção</option>
                 <option value="OPP">OPP</option>
-                <option value="SETOR_DE_APOIO">Setor de Apoio</option>
+                <option value="SETOR_APOIO">Setor de Apoio</option>
                 <option value="COORDENADOR">Coordenador</option>
-                <option value="GESTOR">Gestor</option>
-                <option value="ADMIN">Administrador</option>
+                <option value="ADMINISTRADOR">Administrador</option>
             </select>
 
             <input type="text" id="login" placeholder="Login (CPF/Matrícula)" required>
@@ -130,7 +129,7 @@
                     setor.value === 'OPP' || 
                     setor.value === 'SETOR_DE_APOIO'
                 );
-            case 'SETOR_DE_APOIO':
+            case 'SETOR_APOIO':
                 return setoresBase.filter(setor => 
                     setor.value === 'SETOR_DE_APOIO' || 
                     setor.value === 'OPP'
@@ -140,8 +139,7 @@
                     setor.value === 'COORDENADOR' || 
                     setor.value === 'PROFESSOR'
                 );
-            case 'GESTOR':
-            case 'ADMIN':
+            case 'ADMINISTRADOR':
                 return setoresBase; // Todos os setores
             default:
                 return setoresBase;
@@ -186,7 +184,7 @@
             nome: nome,
             sobrenome: sobrenome,
             cpf: cpf,
-            role: tipoUsuario
+            tipoUsuario: tipoUsuario
         };
 
         if (tipoUsuario !== 'ALUNO') {
@@ -199,7 +197,8 @@
             const response = await fetch(`${BACKEND_URL}/api/usuarios`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`
                 },
                 body: JSON.stringify(userData)
             });
@@ -251,13 +250,14 @@
                 nome: 'Usuário',
                 sobrenome: 'Teste',
                 cpf: '12345678901',
-                role: 'ALUNO'
+                tipoUsuario: 'ALUNO'
             };
 
             const response = await fetch(`${BACKEND_URL}/api/usuarios`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`
                 },
                 body: JSON.stringify(testData)
             });
@@ -347,7 +347,7 @@
             case 'OPP':
                 setorSelect.value = 'OPP';
                 break;
-            case 'SETOR_DE_APOIO':
+            case 'SETOR_APOIO':
                 setorSelect.value = 'SETOR_DE_APOIO';
                 break;
             case 'COORDENADOR':
